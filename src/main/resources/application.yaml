@@ -1,0 +1,4 @@
+kafka:
+  bootstrapServer=localhost:9092
+  input.topic.name=price-input-topic
+  output.topic.name=price-output-topic
