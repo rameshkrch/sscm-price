@@ -1,6 +1,5 @@
 package com.ikea.sscm.intpoc.price.controller;
 
-import com.ikea.sscm.intpoc.price.messaging.KafkaProducer;
 import com.ikea.sscm.intpoc.price.model.Price;
 import com.ikea.sscm.intpoc.price.service.PriceService;
 import lombok.AllArgsConstructor;
@@ -14,17 +13,10 @@ import java.util.List;
 @RequestMapping(path = "/price", produces = "application/json")
 public class PriceRestController {
 
-  private final KafkaProducer kafkaProducer;
-
   @Autowired private PriceService priceService;
 
   @GetMapping("/getprice")
   public List<Price> getPrice() {
     return priceService.getPrices();
-  }
-
-  @PostMapping("/sendprice")
-  public void addMessage(@RequestBody Price message) {
-    kafkaProducer.sendMessage(message);
   }
 }
