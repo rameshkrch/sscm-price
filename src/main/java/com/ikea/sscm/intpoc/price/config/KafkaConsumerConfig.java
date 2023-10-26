@@ -22,10 +22,13 @@ public class KafkaConsumerConfig {
   @Value("${kafka.bootstrapServer}")
   private String bootstrapServer;
 
+  @Value("${kafka.cg.price}")
+  private String cgPrice;
+
   public ConsumerFactory<String, Price> priceConsumerFactory() {
     Map<String, Object> props = new HashMap<>();
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-    props.put(ConsumerConfig.GROUP_ID_CONFIG, "price");
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, cgPrice);
     return new DefaultKafkaConsumerFactory<>(
         props, new StringDeserializer(), new JsonDeserializer<>(Price.class));
   }
