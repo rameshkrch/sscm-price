@@ -25,7 +25,7 @@ public class KafkaConsumerConfig {
   public ConsumerFactory<String, Price> priceConsumerFactory() {
     Map<String, Object> props = new HashMap<>();
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-    props.put(ConsumerConfig.GROUP_ID_CONFIG, "cg-price");
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, "price");
     return new DefaultKafkaConsumerFactory<>(
         props, new StringDeserializer(), new JsonDeserializer<>(Price.class));
   }
