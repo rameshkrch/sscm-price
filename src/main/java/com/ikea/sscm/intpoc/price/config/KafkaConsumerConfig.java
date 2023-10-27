@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-  @Value("${kafka.bootstrapServer}")
+  @Value("${kafka.bootstrap.servers}")
   private String bootstrapServer;
 
   @Value("${kafka.sasl.mechanism}")
@@ -37,11 +37,9 @@ public class KafkaConsumerConfig {
   public ConsumerFactory<String, Price> priceConsumerFactory() {
     Map<String, Object> configProps = new HashMap<>();
     configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-    /*
     configProps.put("sasl.jaas.config", saslJaasConfig);
     configProps.put("security.protocol", securityProtocol);
     configProps.put("sasl.mechanism", saslMechanism);
-    */
     configProps.put(ConsumerConfig.GROUP_ID_CONFIG, cgPrice);
     return new DefaultKafkaConsumerFactory<>(
         configProps, new StringDeserializer(), new JsonDeserializer<>(Price.class));

@@ -17,7 +17,7 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
-  @Value("${kafka.bootstrapServer}")
+  @Value("${kafka.bootstrap.servers}")
   private String bootstrapServer;
 
   @Value("${kafka.sasl.mechanism}")
@@ -36,11 +36,9 @@ public class KafkaProducerConfig {
     configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
     configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
     configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-    /*
     configProps.put("sasl.jaas.config", saslJaasConfig);
     configProps.put("security.protocol", securityProtocol);
     configProps.put("sasl.mechanism", saslMechanism);
-    */
     return new DefaultKafkaProducerFactory<>(configProps);
   }
 
