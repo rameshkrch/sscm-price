@@ -3,11 +3,16 @@ package com.ikea.sscm.intpoc.price.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public class Price {
+@Document(collection = "price")
+public class Price implements Serializable {
 
   private int eventId;
   private String supplierId;

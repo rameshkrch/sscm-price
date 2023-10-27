@@ -13,7 +13,7 @@ import java.util.Map;
 @Configuration
 public class KafkaTopicConfig {
 
-  @Value("${kafka.bootstrap.servers}")
+  @Value("${kafka.bootstrapServer}")
   private String bootstrapServer;
 
   @Value("${kafka.sasl.mechanism}")
@@ -32,9 +32,11 @@ public class KafkaTopicConfig {
   public KafkaAdmin kafkaAdmin() {
     Map<String, Object> configProps = new HashMap<>();
     configProps.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
+    /*
     configProps.put("sasl.jaas.config", saslJaasConfig);
     configProps.put("security.protocol", securityProtocol);
     configProps.put("sasl.mechanism", saslMechanism);
+    */
     return new KafkaAdmin(configProps);
   }
 

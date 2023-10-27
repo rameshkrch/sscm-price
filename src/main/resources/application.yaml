@@ -6,3 +6,6 @@ kafka:
   sasl.mechanism: PLAIN
   sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='P57G7KMT4R7CAGSL' password='OoVwYlm1XcTp92cFSBPXZiTFOzQYgEL+RpWW63oZXdbOmShtIN7yyecVFakYDN7F';
   security.protocol: SASL_SSL
+
+spring.data.mongodb.uri: mongodb+srv://admin:masterkey@cluster0.wewq1kl.mongodb.net/pricedb
+spring.data.mongodb.database: pricedb
