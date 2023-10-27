@@ -19,18 +19,30 @@ import java.util.Map;
 @Configuration
 public class KafkaConsumerConfig {
 
-  @Value("${kafka.bootstrapServer}")
+  @Value("${kafka.bootstrap.servers}")
   private String bootstrapServer;
 
-  @Value("${kafka.cg.price}")
+  @Value("${kafka.sasl.mechanism}")
+  private String saslMechanism;
+
+  @Value("${kafka.sasl.jaas.config}")
+  private String saslJaasConfig;
+
+  @Value("${kafka.security.protocol}")
+  private String securityProtocol;
+
+  @Value("${kafka.consumer.group.name}")
   private String cgPrice;
 
   public ConsumerFactory<String, Price> priceConsumerFactory() {
-    Map<String, Object> props = new HashMap<>();
-    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
-    props.put(ConsumerConfig.GROUP_ID_CONFIG, cgPrice);
+    Map<String, Object> configProps = new HashMap<>();
+    configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
+    configProps.put("sasl.jaas.config", saslJaasConfig);
+    configProps.put("security.protocol", securityProtocol);
+    configProps.put("sasl.mechanism", saslMechanism);
+    configProps.put(ConsumerConfig.GROUP_ID_CONFIG, cgPrice);
     return new DefaultKafkaConsumerFactory<>(
-        props, new StringDeserializer(), new JsonDeserializer<>(Price.class));
+        configProps, new StringDeserializer(), new JsonDeserializer<>(Price.class));
   }
 
   @Bean

@@ -14,7 +14,7 @@ public class MessageListener {
   @KafkaListener(
       topics = "${kafka.input.topic.name}",
       containerFactory = "priceKafkaListenerContainerFactory",
-      groupId = "${kafka.cg.price}")
+      groupId = "${kafka.consumer.group.name}")
   public void priceListener(Price price) {
     log.info("Price message received -> " + price);
     this.priceLatch.countDown();
